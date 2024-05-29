@@ -19,9 +19,7 @@ repositories {
 extra["snippetsDir"] = file("build/generated-snippets")
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.liquibase:liquibase-core")
     developmentOnly("org.springframework.boot:spring-boot-docker-compose")
     runtimeOnly("com.h2database:h2")
     runtimeOnly("org.postgresql:postgresql")
