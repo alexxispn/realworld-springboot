@@ -1,9 +1,8 @@
 package com.nata.realworldspringboot;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nata.realworldspringboot.users.User;
+import com.nata.realworldspringboot.users.UserDto;
 import com.nata.realworldspringboot.users.UserRequest;
-import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,7 @@ class RealWorldSpringbootAcceptanceTests {
     void should_register_a_user() throws Exception {
         String email = "elpepe@test.com";
         String username = "ElManu";
-        var userRequest = new UserRequest(new User(username,
+        var userRequest = new UserRequest(new UserDto(username,
                 email,
                 "password"));
         ObjectMapper objectMapper = new ObjectMapper();

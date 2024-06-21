@@ -1,4 +1,9 @@
 package com.nata.realworldspringboot.users;
 
-public record User(String username, String email, String password) {
+public class User {
+    private Username username;
+
+
+    public hasValue(username: String) {
+        return this.username.getValue() == username;}
 }

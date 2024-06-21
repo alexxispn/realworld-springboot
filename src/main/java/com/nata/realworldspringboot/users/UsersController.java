@@ -4,17 +4,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/users")
 public class UsersController {
+    private final RegisterUser registerUser;
 
-    @PostMapping
+    public UsersController(RegisterUser registerUser) {
+        this.registerUser = registerUser;
+    }
+
+    @PostMapping("/users")
     public ResponseEntity<Object> register(@RequestBody UserRequest userRequest) {
-        return ResponseEntity.created(null).build();
+        var response = this.registerUser.execute();
+        return ResponseEntity.created(null).body(response);
     }
-
-    @GetMapping
-    public ResponseEntity<Object> get() {
-        return ResponseEntity.ok().build();
-    }
-
 }
