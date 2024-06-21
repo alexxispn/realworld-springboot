@@ -20,8 +20,10 @@ class RealWorldSpringbootAcceptanceTests {
 
     @Test
     void should_create_a_user() throws Exception {
-        var userRequest = new UserRequest(new User("user1",
-                "elpepe.com",
+        String email = "elpepe@test.com";
+        String username = "ElManu";
+        var userRequest = new UserRequest(new User(username,
+                email,
                 "password"));
         ObjectMapper objectMapper = new ObjectMapper();
         mvc.perform(post("/users")
@@ -30,7 +32,16 @@ class RealWorldSpringbootAcceptanceTests {
                 .andExpect(status().isCreated())
                 .andExpect(result -> result.getResponse()
                         .getContentAsString()
-                        .contains("user1"));
+                        .contains(("{\n  " +
+                                "\"user\": {\n" +
+                                "    \"email\": \"%s\",\n" +
+                                "    \"token\": \"nulasoComoUnaCasa\",\n" +
+                                "    " +
+                                "\"username\"\"%s\",\n" +
+                                "    \"bio\": \"\",\n" +
+                                "    \"image\": \"null\"\n" +
+                                "  " +
+                                "}\n}").formatted(email, username)));
     }
 
     private record User(String username, String email, String password) { }
