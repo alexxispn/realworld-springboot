@@ -9,7 +9,6 @@ public class UsersController {
 
     @PostMapping
     public ResponseEntity<Object> register(@RequestBody UserRequest userRequest) {
-        System.out.println("Por aqui ent´ñri ");
         return ResponseEntity.created(null).build();
     }
 
