@@ -5,9 +5,9 @@ import java.util.Optional;
 import com.nata.realworldspringboot.users.domain.errors.EmailAlreadyExistsError;
 import com.nata.realworldspringboot.users.domain.errors.UsernameAlreadyExists;
 
-public interface UserRepository {
+public abstract class UserRepository {
 
-    default void ensureNewUserCanBeAdded(User user) {
+    private void ensureNewUserCanBeAdded(User user) {
         if(findByUsername(user.getUsername()).isPresent()){
             throw new UsernameAlreadyExists();
         }
@@ -15,10 +15,15 @@ public interface UserRepository {
             throw new EmailAlreadyExistsError();
         }
     }
-    
-    void addNewUser(User user);
 
-    Optional<User> findByUsername(Username username);
+    public final void addNewUser(User user){
+        ensureNewUserCanBeAdded(user);
+        save(user);
+    };
 
-    Optional<User> findByEmail(Email email);
+    protected abstract void save(User user);
+
+    protected abstract Optional<User> findByUsername(Username username);
+
+    protected abstract Optional<User> findByEmail(Email email);
 }

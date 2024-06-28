@@ -11,17 +11,15 @@ import com.nata.realworldspringboot.users.domain.UserRepository;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MemoryUserRepository implements UserRepository {
+public class MemoryUserRepository extends UserRepository {
     private final List<User> users;
-
 
     public MemoryUserRepository() {
         this.users = new ArrayList<>();
     }
 
     @Override
-    public void addNewUser(User user) {;
-        UserRepository.super.ensureNewUserCanBeAdded(user);
+    protected void save(User user) {
         this.users.add(user);
     }
 
